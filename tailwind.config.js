@@ -8,19 +8,35 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: '#EEF2FF',
+          100: '#E0E7FF',
+          200: '#C7D2FE',
+          300: '#A5B4FC',
+          400: '#818CF8',
+          500: '#6366F1',
+          600: '#4F46E5',
+          700: '#4338CA',
+          800: '#3730A3',
+          900: '#312E81',
+          950: '#1E1B4B',
         },
+        edulift: {
+          navy: '#1E1B4B',
+          darkslate: '#0F172A',
+          indigo: '#4F46E5',
+          teal: '#0D9488',
+          mutedteal: '#115E59',
+          mint: '#F0FDF4',
+          gold: '#D97706',
+          mutedgold: '#B45309',
+          softgold: '#FEF3C7',
+          canvas: '#F8FAFC'
+        }
       },
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Fira Code', 'monospace']
+      }
     },
   },
   plugins: [],

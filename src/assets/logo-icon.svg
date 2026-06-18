@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#312E81" />
+      <stop offset="50%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background container for representation -->
+  <rect width="100%" height="100%" fill="none" rx="32" />
+
+  <!-- The stylized Book pages turning into wings & rocket rising -->
+  <g transform="translate(12, 12)">
+    <!-- Bottom Book spine / foundation -->
+    <path d="M 60 170 Q 116 195 116 160 Q 116 195 172 170" fill="none" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round" />
+    
+    <!-- Left Book Page / Wing -->
+    <path d="M 116 150 C 70 150 40 120 40 80 C 60 90 90 100 116 110" fill="url(#logoGrad)" opacity="0.85" />
+    
+    <!-- Right Book Page / Wing -->
+    <path d="M 116 150 C 162 150 192 120 192 80 C 172 90 142 100 116 110" fill="url(#logoGrad)" opacity="0.85" />
+
+    <!-- Central Elevating Arrow / Rocket Core (The 'Lift') -->
+    <path d="M 116 50 L 90 100 L 105 95 L 105 150 L 127 150 L 127 95 L 142 100 Z" fill="url(#wingGrad)" filter="url(#glow)" />
+    
+    <!-- Sparkles of AI intelligence -->
+    <path d="M 65 50 Q 70 50 70 45 Q 70 50 75 50 Q 70 50 70 55 Q 70 50 65 50 Z" fill="#F59E0B" />
+    <path d="M 160 40 Q 165 40 165 35 Q 165 40 170 40 Q 165 40 165 45 Q 165 40 160 40 Z" fill="#F59E0B" />
+    <circle cx="116" cy="30" r="4" fill="#10B981" />
+  </g>
+</svg>
