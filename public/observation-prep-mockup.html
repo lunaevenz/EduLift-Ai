@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLift AI — Classroom Observation Prep Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            edulift: {
+              navy: '#1E1B4B',
+              darkslate: '#0F172A',
+              indigo: '#4F46E5',
+              teal: '#0D9488',
+              mutedteal: '#115E59',
+              mint: '#F0FDF4',
+              gold: '#D97706',
+              mutedgold: '#B45309',
+              softgold: '#FEF3C7',
+              canvas: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-edulift-canvas text-edulift-darkslate min-h-screen flex">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="w-64 bg-edulift-navy text-slate-300 flex-shrink-0 flex flex-col justify-between hidden md:flex border-r border-indigo-950">
+    <div class="p-6 space-y-8">
+      <!-- Logo Container -->
+      <div class="flex items-center space-x-2">
+        <img src="assets/logo-white.svg" alt="EduLift AI Logo" class="h-9">
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1.5">
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">Workspace</p>
+        
+        <a href="dashboard-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="lesson-plan-generator-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-teal transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>Lesson Planner</span>
+        </a>
+
+        <a href="parent-communication-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-teal transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <span>Parent Assistant</span>
+        </a>
+
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 pt-6 mb-2">Career Support</p>
+
+        <a href="portfolio-builder-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-gold transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>Portfolio Builder</span>
+        </a>
+
+        <a href="observation-prep-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-indigo-900/40 text-white font-semibold transition group">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          <span>Observation Prep</span>
+          <span class="ml-auto inline-block w-2 h-2 rounded-full bg-edulift-gold"></span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="p-4 border-t border-indigo-950 bg-indigo-950/40">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-edulift-teal text-white flex items-center justify-center font-bold">
+          SJ
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-bold text-white truncate">Sarah Jenkins</p>
+          <p class="text-xs text-slate-400 truncate">4th Grade • Lincoln El</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN LAYOUT -->
+  <main class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
+    
+    <!-- Top Nav Header -->
+    <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center space-x-3">
+        <a href="dashboard-mockup.html" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition" title="Back to Dashboard">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+        </a>
+        <h1 class="text-xl font-bold text-slate-900">Classroom Observation Prep Tool</h1>
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-edulift-softgold text-amber-800 border border-amber-200">
+          <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-edulift-gold animate-pulse"></span>
+          Principal Review Mode Active
+        </span>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY - split into inputs and dynamic feedback panels -->
+    <div class="flex-1 flex overflow-hidden">
+      
+      <!-- LEFT CONFIGURATION PANE (Forms & Checklists) -->
+      <section class="w-[440px] bg-white border-r border-slate-200 p-6 overflow-y-auto flex flex-col justify-between flex-shrink-0">
+        <div class="space-y-6">
+          <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl text-slate-800 space-y-1.5">
+            <p class="text-xs font-bold text-edulift-indigo uppercase tracking-wider">UPCOMING OBSERVATION EVENT</p>
+            <div class="text-sm font-bold text-slate-900">4th Grade Science — Energy Processing & Photosynthesis</div>
+            <p class="text-xs text-slate-500">Observer: <strong>Principal Dr. Chen</strong> • Date: <strong>June 24, 2026</strong></p>
+          </div>
+
+          <!-- Observation Tabs -->
+          <div class="border-b border-slate-200">
+            <div class="flex space-x-4 text-xs font-bold uppercase tracking-wider" role="tablist">
+              <button onclick="switchObsTab('brief')" id="tab-brief" class="pb-2 text-edulift-indigo border-b-2 border-edulift-indigo transition">
+                1. Lesson Brief
+              </button>
+              <button onclick="switchObsTab('checklist')" id="tab-checklist" class="pb-2 text-slate-400 hover:text-slate-800 transition">
+                2. Principal Checklist
+              </button>
+              <button onclick="switchObsTab('reflection')" id="tab-reflection" class="pb-2 text-slate-400 hover:text-slate-800 transition">
+                3. Post-Reflection Helper
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: PRE-OBSERVATION BRIEF FORM -->
+          <div id="obs-brief" class="space-y-5">
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-slate-700">Observation Evaluation Focus Area</label>
+              <select id="focusGoal" onchange="generateBrief()" class="block w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-edulift-indigo bg-white">
+                <option value="engagement">Domain 3C: Engaging Students in Learning (Inquiry role-play)</option>
+                <option value="questioning">Domain 3B: Using Questioning and Discussion Techniques</option>
+                <option value="differentiation">Domain 1D: Designing Coherent Instruction (Accommodating IEP/ELL)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-slate-700">Linked Active Lesson Plan</label>
+              <select class="block w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-edulift-indigo bg-white">
+                <option>Photosynthesis & Energy Transfer (Guided Roleplay Plan)</option>
+                <option>Math Multi-Digit Addition (Exit Ticket Grid)</option>
+              </select>
+            </div>
+
+            <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50 space-y-1 text-xs">
+              <p class="font-bold text-amber-800">Observation Coaching Pro Tip:</p>
+              <p class="text-slate-600 leading-relaxed">Dr. Chen highly values student-led peer feedback. During the Photosynthesis roleplay session (Minute 25), ask the "Sun" group to give feedback on how the "Roots" did absorbing water to prompt metacognitive standard reflection.</p>
+            </div>
+          </div>
+
+          <!-- TAB 2: PRINCIPAL EVALUATION CHECKLIST -->
+          <div id="obs-checklist" class="space-y-4 hidden">
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Dr. Chen's Danielson Standard Cheat-Sheet</h3>
+            <p class="text-xs text-slate-500">Check off critical elements before the lesson to ensure Domain mastery evidence is visible.</p>
+            
+            <div class="space-y-3">
+              <!-- Checklist Item 1 -->
+              <label class="border border-slate-200 rounded-xl p-3 flex items-start space-x-3 cursor-pointer hover:bg-slate-50 select-none">
+                <input type="checkbox" checked class="mt-0.5 rounded border-slate-300 text-edulift-indigo focus:ring-indigo-500">
+                <div class="text-left text-xs">
+                  <p class="font-bold text-slate-900">Standard Written on Board (Domain 1C)</p>
+                  <p class="text-slate-400 mt-0.5">Ensure NGSS "4-LS1-1" is prominent in student-friendly wording.</p>
+                </div>
+              </label>
+
+              <!-- Checklist Item 2 -->
+              <label class="border border-slate-200 rounded-xl p-3 flex items-start space-x-3 cursor-pointer hover:bg-slate-50 select-none">
+                <input type="checkbox" checked class="mt-0.5 rounded border-slate-300 text-edulift-indigo focus:ring-indigo-500">
+                <div class="text-left text-xs">
+                  <p class="font-bold text-slate-900">Strategic Grouping (Domain 2C)</p>
+                  <p class="text-slate-400 mt-0.5">Accommodate Marcus and Jordan by pairing them near visual flashcards.</p>
+                </div>
+              </label>
+
+              <!-- Checklist Item 3 -->
+              <label class="border border-slate-200 rounded-xl p-3 flex items-start space-x-3 cursor-pointer hover:bg-slate-50 select-none">
+                <input type="checkbox" class="mt-0.5 rounded border-slate-300 text-edulift-indigo focus:ring-indigo-500">
+                <div class="text-left text-xs">
+                  <p class="font-bold text-slate-900">Peer Reflection Trigger (Domain 3B)</p>
+                  <p class="text-slate-400 mt-0.5">Prompt student-to-student feedback cycle on the roleplay model performance.</p>
+                </div>
+              </label>
+
+              <!-- Checklist Item 4 -->
+              <label class="border border-slate-200 rounded-xl p-3 flex items-start space-x-3 cursor-pointer hover:bg-slate-50 select-none">
+                <input type="checkbox" class="mt-0.5 rounded border-slate-300 text-edulift-indigo focus:ring-indigo-500">
+                <div class="text-left text-xs">
+                  <p class="font-bold text-slate-900">Formative Assessment (Domain 3D)</p>
+                  <p class="text-slate-400 mt-0.5">Use the "Solar Factory Leaf Diagram" exit ticket to assess 100% of the class.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- TAB 3: POST-OBSERVATION REFLECTION HELPER -->
+          <div id="obs-reflection" class="space-y-4 hidden">
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide">AI Post-Lesson Reflection Builder</h3>
+            <p class="text-xs text-slate-500">Draft your standard reflection form. Type raw bullets of how the lesson went, and the AI will format it into a formal, Danielson-aligned writeup.</p>
+            
+            <div class="space-y-2.5">
+              <label class="block text-xs font-bold text-slate-700">Your Lesson Notes / Raw Feedback</label>
+              <textarea id="reflectionNotes" rows="5" class="block w-full p-3.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-edulift-indigo bg-white" placeholder="E.g. Roleplay went great. SPED students engaged but water cleanup took too long, ELA standard hit well. Exit ticket was 90% master...">Roleplay went great, Marcus was super engaged and clean up water spill. However, minute 25 roleplay took 5 minutes longer than planned. IEP and ELL students mastered vocabulary due to visual cards on standard 4-LS1-1. Exit ticket results showed 95% mastery.</textarea>
+            </div>
+
+            <button onclick="buildReflection()" class="w-full inline-flex items-center justify-center py-2.5 rounded-xl text-white bg-edulift-indigo hover:bg-indigo-700 transition font-semibold text-xs shadow shadow-indigo-600/10">
+              Compile Professional Reflection Write-Up
+            </button>
+          </div>
+
+        </div>
+
+        <div class="pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 flex-shrink-0">
+          <p>Observation Date: June 24, 2026</p>
+          <p class="text-teal-600 font-bold">Danielson Framework Aligned</p>
+        </div>
+      </section>
+
+      <!-- RIGHT OUTPUT VIEWER PANE (The AI observation output preview) -->
+      <section class="flex-1 bg-slate-100 p-6 overflow-hidden flex flex-col justify-between relative">
+        
+        <!-- Live Loading overlay -->
+        <div id="loader" class="hidden absolute inset-0 bg-slate-100/90 flex flex-col items-center justify-center space-y-4 z-40">
+          <div class="w-16 h-16 rounded-full border-4 border-indigo-200 border-t-edulift-indigo animate-spin"></div>
+          <p class="font-bold text-lg text-slate-900" id="loaderText">EduLift AI is formulating your principal brief...</p>
+        </div>
+
+        <!-- Output display sheet -->
+        <div class="flex-1 bg-white rounded-2xl border border-slate-200/80 shadow-lg flex flex-col overflow-hidden">
+          
+          <!-- Document Actions Header -->
+          <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between flex-shrink-0">
+            <h3 class="text-sm font-bold text-slate-900" id="previewHeader">AI Executive Principal Pre-Observation Brief</h3>
+            
+            <div class="flex items-center space-x-2">
+              <button class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold transition flex items-center space-x-1" title="Copy to Clipboard">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <span>Copy</span>
+              </button>
+              <button class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold transition flex items-center space-x-1" title="Export PDF">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Export PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Document display board -->
+          <div class="flex-1 p-8 overflow-y-auto max-w-3xl w-full mx-auto" id="document-display">
+            
+            <!-- Default Pre-Observation Brief content -->
+            <div id="content-brief" class="space-y-6">
+              <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-edulift-indigo uppercase tracking-wider" id="focusAreaTag">DANIELSON FOCUS: Domain 3C — Engaging Students in Learning</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 mt-1">Pre-Observation Executive Brief</h3>
+                <p class="text-sm text-slate-500 font-medium">Instructor: <strong>Sarah Jenkins</strong> • Lincoln Elementary School</p>
+              </div>
+
+              <!-- Brief Blocks -->
+              <div class="space-y-4 text-sm text-slate-600 leading-relaxed font-sans">
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">I. Lesson Design & Alignment (Domain 1C)</h4>
+                  <p>The lesson aims to teach NGSS 4-LS1-1, explaining how plants process water, carbon dioxide, and sunlight into glucose and oxygen. This abstract chemical transformation is translated into a physical modeling framework, helping 4th-grade minds conceptualize metabolic cycles.</p>
+                </div>
+
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">II. Active Cognitive Engagement Strategy (Domain 3C)</h4>
+                  <p id="focusStrategy">Students are placed into collaborative kinetic groups representing the Solar Factory ingredients (The Sun, The Air, The Roots). Students act out the chemical transformation using high-visual aids (flashlights for photons, blue paper for H2O, balloons for CO2) to solidify conceptual energy storage mapping.</p>
+                </div>
+
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">III. Accommodations & Inclusions (Domain 1D)</h4>
+                  <p>English Language Learners are supported through dual-language vocabulary visual aids (*Chlorophyll / Clorofila*). Neurodivergent students with active IEP accommodations are strategically positioned in central physical groups to provide tactile anchoring during roleplay modeling, eliminating written-response anxiety during key conceptual transition stops.</p>
+                </div>
+
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">IV. Formative Assessment & Metrics (Domain 3D)</h4>
+                  <p>A paper-based exit slip diagram (The Solar Factory Leaf) checks individual concept mastery at Minute 35, requiring students to label chemical inputs and outputs. Formative benchmark expectation: 85% class mastery.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Post-Observation Reflection output (HIDDEN) -->
+            <div id="content-reflection" class="space-y-6 hidden">
+              <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-edulift-teal uppercase tracking-wider">DANIELSON POST-LESSON REFLECTION — FORM 4A</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 mt-1">Written Analysis of Instructional Outcome</h3>
+                <p class="text-sm text-slate-500 font-medium">Submitted by: <strong>Sarah Jenkins</strong> • Lincoln Elementary School</p>
+              </div>
+
+              <!-- Output Text blocks -->
+              <div class="space-y-4 text-sm text-slate-600 leading-relaxed font-sans">
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">I. Instructional Success & Engagement Analysis (Domain 3C)</h4>
+                  <p>The kinetic photosynthesis role-play was highly effective. Standard-aligned visuals (flashlights, balloons, and cardstock H2O roots) engaged 100% of the classroom, specifically allowing active IEP/504 neurodiverse students to participate fully and demonstrate mastery without written processing strain. Marcus Vance was exceptionally engaged during active modeling, displaying productive collaboration.</p>
+                </div>
+
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">II. Pacing and Sequence Modification (Domain 1E)</h4>
+                  <p>Pacing required adjustment at Minute 25. Facilitating student transitions into kinetic ingredient groupings took approximately five minutes longer than scheduled. In future iterations, classroom entry and grouping anchors will be scaffolded in advance with color-coded seat tags to streamline procedural transition flow.</p>
+                </div>
+
+                <div class="space-y-1">
+                  <h4 class="font-bold text-slate-900">III. Standard & Vocabulary Mastery Outcomes (Domain 3D)</h4>
+                  <p>The ELA vocabulary scaffolds successfully aided English Language Learners in mastering standard terms (*chlorophyll*, *carbon dioxide*, *glucose*). The final exit ticket assessments (Solar Factory Leaf Diagrams) demonstrated 95% individual conceptual mastery, successfully verifying student energy-processing comprehension under NGSS standard 4-LS1-1.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="mt-4 text-center text-xs text-slate-400">
+          This brief can be printed or emailed directly to Dr. Chen prior to their arrival on June 24, 2026.
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    function switchObsTab(tabId) {
+      document.getElementById('obs-brief').classList.add('hidden');
+      document.getElementById('obs-checklist').classList.add('hidden');
+      document.getElementById('obs-reflection').classList.add('hidden');
+
+      const tabs = ['brief', 'checklist', 'reflection'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        btn.className = "pb-2 text-slate-400 hover:text-slate-800 transition";
+      });
+
+      document.getElementById('obs-' + tabId).classList.remove('hidden');
+      document.getElementById('tab-' + tabId).className = "pb-2 text-edulift-indigo border-b-2 border-edulift-indigo transition";
+
+      // Toggle live previews
+      if (tabId === 'reflection') {
+        document.getElementById('content-brief').classList.add('hidden');
+        document.getElementById('content-reflection').classList.add('hidden'); // hidden until compiled
+        document.getElementById('previewHeader').textContent = "AI Danielson-Aligned Reflection Document";
+      } else {
+        document.getElementById('content-brief').classList.remove('hidden');
+        document.getElementById('content-reflection').classList.add('hidden');
+        document.getElementById('previewHeader').textContent = "AI Executive Principal Pre-Observation Brief";
+      }
+    }
+
+    function generateBrief() {
+      const focus = document.getElementById('focusGoal').value;
+      const tag = document.getElementById('focusAreaTag');
+      const strategy = document.getElementById('focusStrategy');
+
+      if (focus === 'engagement') {
+        tag.textContent = "DANIELSON FOCUS: Domain 3C — Engaging Students in Learning";
+        strategy.textContent = "Students are placed into collaborative kinetic groups representing the Solar Factory ingredients (The Sun, The Air, The Roots). Students act out the chemical transformation using high-visual aids (flashlights for photons, blue paper for H2O, balloons for CO2) to solidify conceptual energy storage mapping.";
+      } else if (focus === 'questioning') {
+        tag.textContent = "DANIELSON FOCUS: Domain 3B — Questioning & Discussion Techniques";
+        strategy.textContent = "The teacher deploys standard-aligned, high-level Bloom's Taxonomy questions during roleplay groupings. Key questions include: 'How would our plant cell react if standard solar photon delivery was cut by 50%?' and 'Can the Roots explain why H2O is critical for glucose creation?' prompts student-led critical thinking.";
+      } else if (focus === 'differentiation') {
+        tag.textContent = "DANIELSON FOCUS: Domain 1D — Designing Coherent Instruction";
+        strategy.textContent = "The lesson utilizes structured, scaffolded transitions designed to lower cognitive strain. Multi-sensory accommodations (tactile handling of balloons/paper, physical movement, visual flashcards) ensure students with specialized IEP/504 plans have alternative channels to absorb standard material.";
+      }
+    }
+
+    function buildReflection() {
+      const loader = document.getElementById('loader');
+      const loaderText = document.getElementById('loaderText');
+      loaderText.textContent = "AI is evaluating notes & formatting reflection...";
+      loader.classList.remove('hidden');
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        document.getElementById('content-brief').classList.add('hidden');
+        document.getElementById('content-reflection').classList.remove('hidden');
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
