@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import logoPrimary from '../assets/logo-primary.svg';
 import heroImage from '../assets/landing-hero.png';
 import { 
-  BookOpen, 
   FileText, 
   MessageSquare, 
   TrendingUp, 
