@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLift AI — IEP & Intervention Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            edulift: {
+              navy: '#1E1B4B',
+              darkslate: '#0F172A',
+              indigo: '#4F46E5',
+              teal: '#0D9488',
+              mutedteal: '#115E59',
+              mint: '#F0FDF4',
+              gold: '#D97706',
+              mutedgold: '#B45309',
+              softgold: '#FEF3C7',
+              canvas: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-edulift-canvas text-edulift-darkslate min-h-screen flex">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="w-64 bg-edulift-navy text-slate-300 flex-shrink-0 flex flex-col justify-between hidden md:flex border-r border-indigo-950">
+    <div class="p-6 space-y-8">
+      <!-- Logo Container -->
+      <div class="flex items-center space-x-2">
+        <img src="assets/logo-white.svg" alt="EduLift AI Logo" class="h-9">
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1.5">
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">Workspace</p>
+        
+        <a href="dashboard-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="lesson-plan-generator-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-teal transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>Lesson Planner</span>
+        </a>
+
+        <a href="parent-communication-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-teal transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <span>Parent Assistant</span>
+        </a>
+
+        <a href="iep-intervention-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-indigo-900/40 text-white font-semibold transition group">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>IEP & Intervention</span>
+          <span class="ml-auto inline-block w-2.5 h-2.5 rounded-full bg-edulift-teal"></span>
+        </a>
+
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 pt-6 mb-2">Career Support</p>
+
+        <a href="portfolio-builder-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-gold transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>Portfolio Builder</span>
+        </a>
+
+        <a href="observation-prep-mockup.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group">
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-edulift-gold transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          <span>Observation Prep</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="p-4 border-t border-indigo-950 bg-indigo-950/40">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-edulift-teal text-white flex items-center justify-center font-bold">
+          SJ
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-bold text-white truncate">Sarah Jenkins</p>
+          <p class="text-xs text-slate-400 truncate">4th Grade • Lincoln El</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN LAYOUT -->
+  <main class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
+    
+    <!-- Top Nav Header -->
+    <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center space-x-3">
+        <a href="dashboard-mockup.html" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition" title="Back to Dashboard">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+        </a>
+        <h1 class="text-xl font-bold text-slate-900">IEP & Intervention Support Specialist</h1>
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-edulift-teal border border-teal-200">
+          <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-edulift-teal animate-pulse"></span>
+          MTSS & IDEA Compliance Engine
+        </span>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY - split into inputs and dynamic feedback panels -->
+    <div class="flex-1 flex overflow-hidden">
+      
+      <!-- LEFT CONFIGURATION PANE (Forms & Input Parameters) -->
+      <section class="w-[440px] bg-white border-r border-slate-200 p-6 overflow-y-auto flex flex-col justify-between flex-shrink-0">
+        <div class="space-y-6">
+          
+          <div class="space-y-1">
+            <h2 class="text-base font-bold text-slate-900">Student Profiles & Criteria</h2>
+            <p class="text-xs text-slate-500">Construct legal, baseline-driven, or tier-focused goals and supports.</p>
+          </div>
+
+          <!-- Step 1: Student Context -->
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 space-y-3">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">1. Student Context</p>
+            
+            <div class="grid grid-cols-2 gap-3">
+              <div class="space-y-1">
+                <label class="block text-[11px] font-bold text-slate-600">Student Name</label>
+                <input type="text" id="stud-name" value="Liam" class="block w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-edulift-indigo bg-white">
+              </div>
+              <div class="space-y-1">
+                <label class="block text-[11px] font-bold text-slate-600">Grade / Age</label>
+                <select id="stud-grade" class="block w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none">
+                  <option value="4">4th Grade (Age 9)</option>
+                  <option value="5">5th Grade (Age 10)</option>
+                  <option value="3">3rd Grade (Age 8)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-600">California Eligibility Disability Category</label>
+              <select id="disability" class="block w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none">
+                <option value="SLD">Specific Learning Disability (SLD)</option>
+                <option value="AUT">Autism (AUT)</option>
+                <option value="SLI">Speech or Language Impairment (SLI)</option>
+                <option value="OHI">Other Health Impairment (OHI)</option>
+                <option value="ED">Emotional Disturbance (ED)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="space-y-1">
+                <label class="block text-[11px] font-bold text-slate-600">Placement</label>
+                <select class="block w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none text-[11px]">
+                  <option>Gen Ed (≥80% in Gen Ed)</option>
+                  <option>Resource Pullout (40-79%)</option>
+                  <option>Special Day Class (<40%)</option>
+                </select>
+              </div>
+              <div class="space-y-1">
+                <label class="block text-[11px] font-bold text-slate-600">Service Provider</label>
+                <select class="block w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none text-[11px]">
+                  <option>SPED Teacher</option>
+                  <option>Speech Therapist (SLP)</option>
+                  <option>Occupational Therapist</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Component Choice -->
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-700">2. IEP/MTSS Component Type</label>
+            <div class="grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-xl">
+              <button onclick="switchDocComponent('goals')" id="btn-goals" class="py-1.5 px-2 text-center text-xs font-bold rounded-lg bg-white text-slate-900 shadow transition">
+                SMART Goals
+              </button>
+              <button onclick="switchDocComponent('accommodations')" id="btn-accommodations" class="py-1.5 px-2 text-center text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition">
+                Accomms
+              </button>
+              <button onclick="switchDocComponent('mtss')" id="btn-mtss" class="py-1.5 px-2 text-center text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition">
+                MTSS Plan
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Area of Need, Skills & Baseline -->
+          <div class="space-y-4">
+            
+            <div id="need-goals-fields" class="space-y-4">
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Area of Need & Domain</label>
+                <select id="need-area" class="block w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-edulift-indigo">
+                  <option value="math">Mathematics Calculation / Math Problem Solving</option>
+                  <option value="reading">Reading Comprehension / Reading Fluency</option>
+                  <option value="writing">Written Language / Spelling</option>
+                  <option value="behavior">Behavioral (Self-Regulation / Task Completion)</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Specific Skill Focused</label>
+                <input type="text" id="need-skill" value="Multi-digit multiplication with regrouping" class="block w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-edulift-indigo">
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Current Performance (Baseline Data)</label>
+                <textarea id="need-baseline" rows="4" class="block w-full p-3 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-edulift-indigo" placeholder="How is student currently performing? Include numeric baseline.">Student solves 2-digit × 1-digit with 60% accuracy (6/10 correct). Drops to 30% accuracy (3/10 correct) when both numbers are 2-digit. Knows basic facts but inconsistent with regrouping algorithm.</textarea>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Observable Behavior Breakdown</label>
+                <input type="text" id="need-behavior" value="Skips regrouping step when multiplying tens place" class="block w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-edulift-indigo">
+              </div>
+            </div>
+
+            <!-- Accommodations fields (Dynamically updated if needed) -->
+            <div id="need-accomms-fields" class="space-y-4 hidden">
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Target Support Subject Areas</label>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <label class="flex items-center space-x-2"><input type="checkbox" checked class="rounded"> <span>Mathematics</span></label>
+                  <label class="flex items-center space-x-2"><input type="checkbox" checked class="rounded"> <span>English Language Arts</span></label>
+                  <label class="flex items-center space-x-2"><input type="checkbox" class="rounded"> <span>Science (NGSS)</span></label>
+                  <label class="flex items-center space-x-2"><input type="checkbox" class="rounded"> <span>Testing / Assessments</span></label>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Exclude Modifications? (Impact on Standards)</label>
+                <label class="flex items-center space-x-2 text-xs">
+                  <input type="checkbox" class="rounded">
+                  <span>Show ONLY Accommodations (No changes to curriculum expectations)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- MTSS fields -->
+            <div id="need-mtss-fields" class="space-y-4 hidden">
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">MTSS Intervention Tier</label>
+                <select id="mtss-tier" class="block w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white">
+                  <option value="2">Tier 2 — Targeted Small Group (6-8 Weeks)</option>
+                  <option value="3">Tier 3 — Intensive Individualized Intervention</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700">Intervention Duration & Frequency</label>
+                <input type="text" id="mtss-freq" value="30 minutes, 4x per week in small group" class="block w-full px-3 py-2 text-xs rounded-xl border border-slate-200">
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Generate Action Button -->
+          <button onclick="generateDoc()" class="w-full inline-flex items-center justify-center py-3 rounded-xl text-white bg-edulift-indigo hover:bg-indigo-700 transition font-semibold text-sm shadow-md shadow-indigo-600/10">
+            <svg class="w-4 h-4 mr-2 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Generate Aligned Support Draft
+          </button>
+
+        </div>
+
+        <div class="pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+          <p>Local Sandbox Sync Active</p>
+          <p class="font-bold text-emerald-600">FERPA Compliant</p>
+        </div>
+      </section>
+
+      <!-- RIGHT COMPLIANCE REVIEWER & RESULTS DISPLAY (Split layout) -->
+      <section class="flex-1 bg-slate-100 p-6 overflow-hidden flex flex-col justify-between relative">
+        
+        <!-- Interactive loading overlay -->
+        <div id="loader" class="hidden absolute inset-0 bg-slate-100/90 flex flex-col items-center justify-center space-y-4 z-40">
+          <div class="w-16 h-16 rounded-full border-4 border-indigo-200 border-t-edulift-indigo animate-spin"></div>
+          <p class="font-bold text-lg text-slate-900" id="loader-text">EduLift AI is executing California Ed Code check...</p>
+        </div>
+
+        <!-- Master Result Card Wrapper -->
+        <div class="flex-1 bg-white rounded-2xl border border-slate-200/80 shadow-lg flex flex-col overflow-hidden">
+          
+          <!-- Document Actions & Standards Header -->
+          <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center space-x-3">
+              <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Teacher-In-The-Loop Draft Review</h3>
+              <span id="active-component-tag" class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-edulift-indigo">
+                IEP Goals & Benchmarks
+              </span>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <button onclick="simulateExport('DOCX')" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold transition flex items-center space-x-1" title="Export as Word document">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Export DOCX</span>
+              </button>
+              <button onclick="simulateExport('PDF')" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold transition flex items-center space-x-1" title="Export as PDF">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>Print PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Non-Negotiable Compliance Banner -->
+          <div class="px-6 py-3.5 bg-amber-50 border-b border-amber-200 text-slate-700 flex items-start space-x-2.5 flex-shrink-0">
+            <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div class="text-xs">
+              <span class="font-bold text-slate-900 block">⚠️ AI-GENERATED DRAFT — TEACHER REVIEW REQUIRED</span>
+              This draft is prepared to assist the IEP team. All content must be verified, customized, and approved by qualified professionals (IDEA §300.320 & CA Ed Code §56345). The AI does not make educational decisions.
+            </div>
+          </div>
+
+          <!-- Main results viewport -->
+          <div class="flex-1 flex overflow-hidden">
+            
+            <!-- Dynamic Content Output Sheet -->
+            <div class="flex-1 p-8 overflow-y-auto" id="sheet-viewport">
+              
+              <!-- GOALS COMPONENT VIEW -->
+              <div id="content-goals" class="space-y-6">
+                
+                <div class="border-b border-slate-100 pb-4 flex justify-between items-start">
+                  <div>
+                    <h3 class="text-xl font-extrabold text-slate-900">Annual SMART IEP Goal suggestions</h3>
+                    <p class="text-xs text-slate-500 font-medium">Prepared for: <strong class="student-name-val">Liam</strong> • Category: <strong class="student-disability-val">SLD (Mathematics)</strong></p>
+                  </div>
+                  <div class="text-right">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Compliant Draft
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Annual Goal Card -->
+                <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">ANNUAL GOAL STATEMENT</span>
+                    <span class="text-[10px] text-edulift-indigo font-bold bg-indigo-50 px-2 py-0.5 rounded">IDEA §300.320(a)(2)</span>
+                  </div>
+                  
+                  <textarea rows="3" class="w-full text-sm font-medium text-slate-800 leading-relaxed p-3 rounded-xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-indigo-500/10">Given 10 two-digit by two-digit multiplication problems, Liam will accurately solve them using the standard algorithm with regrouping, achieving 80% accuracy (8/10 correct) on 3 consecutive weekly probes by June 2027.</textarea>
+
+                  <!-- SMART components parsed -->
+                  <div class="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-4 rounded-xl">
+                    <div><span class="font-bold text-slate-500 block">Condition:</span> "Given 10 two-digit by two-digit multiplication problems..."</div>
+                    <div><span class="font-bold text-slate-500 block">Observable Behavior:</span> "...solve using standard algorithm with regrouping..."</div>
+                    <div class="mt-2"><span class="font-bold text-slate-500 block">Criterion:</span> "...80% accuracy (8/10 correct) on 3 consecutive probes..."</div>
+                    <div class="mt-2"><span class="font-bold text-slate-500 block">Timeline:</span> "...by June 2027."</div>
+                  </div>
+                </div>
+
+                <!-- Incremental Benchmarks / Objectives -->
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Incremental Benchmarks / Objectives</h4>
+                    <button class="text-xs text-edulift-indigo font-bold hover:text-indigo-800">+ Add Objective</button>
+                  </div>
+
+                  <!-- Benchmark 1 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white flex items-start justify-between space-x-3">
+                    <div class="space-y-1 flex-1">
+                      <div class="flex items-center space-x-2">
+                        <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">Step 1</span>
+                        <span class="text-[11px] text-slate-400 font-bold">Target: Oct 15, 2026</span>
+                      </div>
+                      <input type="text" value="Liam will solve 2-digit × 1-digit problems with regrouping with 80% accuracy on 2 consecutive probes." class="w-full text-xs font-medium text-slate-700 bg-transparent border-b border-dashed border-slate-200 pb-1 focus:outline-none focus:border-indigo-500">
+                    </div>
+                  </div>
+
+                  <!-- Benchmark 2 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white flex items-start justify-between space-x-3">
+                    <div class="space-y-1 flex-1">
+                      <div class="flex items-center space-x-2">
+                        <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">Step 2</span>
+                        <span class="text-[11px] text-slate-400 font-bold">Target: Jan 15, 2027</span>
+                      </div>
+                      <input type="text" value="Liam will solve 2-digit × 2-digit problems without regrouping with 80% accuracy on 2 consecutive probes." class="w-full text-xs font-medium text-slate-700 bg-transparent border-b border-dashed border-slate-200 pb-1 focus:outline-none focus:border-indigo-500">
+                    </div>
+                  </div>
+
+                  <!-- Benchmark 3 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white flex items-start justify-between space-x-3">
+                    <div class="space-y-1 flex-1">
+                      <div class="flex items-center space-x-2">
+                        <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">Step 3</span>
+                        <span class="text-[11px] text-slate-400 font-bold">Target: Apr 15, 2027</span>
+                      </div>
+                      <input type="text" value="Liam will solve 2-digit × 2-digit problems with regrouping once with 80% accuracy on 2 consecutive probes." class="w-full text-xs font-medium text-slate-700 bg-transparent border-b border-dashed border-slate-200 pb-1 focus:outline-none focus:border-indigo-500">
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- ACCOMMODATIONS COMPONENT VIEW -->
+              <div id="content-accommodations" class="space-y-6 hidden">
+                
+                <div class="border-b border-slate-100 pb-4">
+                  <h3 class="text-xl font-extrabold text-slate-900">IEP Accommodations & Modifications</h3>
+                  <p class="text-xs text-slate-500 font-medium">Categorized suggestions for: <strong class="student-name-val">Liam</strong> • Alignment: <strong class="student-disability-val">SLD (Mathematics)</strong></p>
+                </div>
+
+                <!-- Accommodations Accordion / Cards -->
+                <div class="space-y-3">
+                  
+                  <!-- Card 1 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 uppercase">Presentation Support</span>
+                      <span class="text-[10px] text-slate-400 font-semibold">Difficulty: Low</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-950">Provide step-by-step visual cue cards for multi-step math algorithms</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed"><strong>Rationale:</strong> Supports working memory limits while the student internalizes standard computational procedures. Eliminates steps anxiety.</p>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-50 text-purple-700 uppercase">Response Support</span>
+                      <span class="text-[10px] text-slate-400 font-semibold">Difficulty: Medium</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-950">Allow verbal explanation of problem-solving process as alternative to written work</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed"><strong>Rationale:</strong> Demonstrates conceptual algorithm math understanding when physical written outputs act as motor barriers.</p>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-yellow-50 text-yellow-700 uppercase">Timing Support</span>
+                      <span class="text-[10px] text-slate-400 font-semibold">Difficulty: Low</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-950">Extended time (1.5x) on math assessments with scheduled sensory breaks</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed"><strong>Rationale:</strong> Deficit processing speeds slow task completion but do not reflect academic or mathematical comprehension levels.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- MTSS COMPONENT VIEW -->
+              <div id="content-mtss" class="space-y-6 hidden">
+                
+                <div class="border-b border-slate-100 pb-4">
+                  <h3 class="text-xl font-extrabold text-slate-900">MTSS Tier Intervention Plan</h3>
+                  <p class="text-xs text-slate-500 font-medium">Structured Strategy Sheet for: <strong class="student-name-val">Liam</strong> • Focus: <strong class="student-disability-val">SLD (Mathematics)</strong></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 text-xs space-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase block">Intervention Tier Level</span>
+                    <p class="font-bold text-slate-900" id="mtss-tier-val">Tier 2 — Targeted Small Group</p>
+                  </div>
+                  <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 text-xs space-y-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase block">Frequency & Duration</span>
+                    <p class="font-bold text-slate-900" id="mtss-freq-val">30 minutes, 4x per week in small group</p>
+                  </div>
+                </div>
+
+                <!-- Strategy card -->
+                <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Intervention Strategy Outline</h4>
+                  <p class="text-xs text-slate-700 leading-relaxed font-medium">Deploy CRA (Concrete-Representational-Abstract) model. Begin with physical block regrouping models, progress to grid paper mapping, and finalize on the standard regrouping multiplication algorithm drills.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Decision Rules & Progression Gates</h4>
+                  
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white text-xs space-y-1">
+                    <p class="font-bold text-slate-900">Fading Support (Transition Out)</p>
+                    <p class="text-slate-500">If student achieves &gt;80% accuracy on computation checks across 3 consecutive weeks, transition to tier 1 general curriculum scaffold monitoring.</p>
+                  </div>
+
+                  <div class="p-4 rounded-xl border border-slate-200 bg-white text-xs space-y-1">
+                    <p class="font-bold text-slate-900">Intensifying Strategy (Tier 3 Transition)</p>
+                    <p class="text-slate-500">If student achieves &lt;40% accuracy across 4 consecutive assessment checks, intensify strategy to 1-on-1 customized sessions and schedule Student Study Team (SST) review.</p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- COMPLIANCE & TEACHER IN THE LOOP REVIEW SIDEBAR (RIGHT SLIDER) -->
+            <div class="w-[300px] bg-slate-50 border-l border-slate-200 p-6 flex flex-col justify-between overflow-y-auto flex-shrink-0">
+              <div class="space-y-6">
+                
+                <div class="text-center space-y-2">
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">COMPLIANCE AUDIT SCORE</p>
+                  
+                  <div class="inline-flex items-center justify-center p-3.5 bg-emerald-50 rounded-full border border-emerald-100 text-emerald-600">
+                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+
+                  <div class="text-lg font-extrabold text-slate-950">98% Compliant</div>
+                  <p class="text-[10px] text-slate-400">Successfully validated against state frameworks & IDEA standards.</p>
+                </div>
+
+                <!-- Verified indicators list -->
+                <div class="space-y-3.5 pt-4 border-t border-slate-200">
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">IDEA Goal Checklist</p>
+                  
+                  <div class="flex items-start space-x-2.5 text-xs text-slate-600">
+                    <svg class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <span class="font-bold text-slate-900 block">Condition Included</span>
+                      "Given 10 multi-digit multiplication problems..."
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-2.5 text-xs text-slate-600">
+                    <svg class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <span class="font-bold text-slate-900 block">Observable Behavior</span>
+                      "...solve using standard algorithm..."
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-2.5 text-xs text-slate-600">
+                    <svg class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <span class="font-bold text-slate-900 block">Measurable Criterion</span>
+                      "...80% accuracy on 3 consecutive probes..."
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-2.5 text-xs text-slate-600">
+                    <svg class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <span class="font-bold text-slate-900 block">Timebound Phase</span>
+                      "...by June 2027."
+                    </div>
+                  </div>
+                </div>
+
+                <!-- California Ed Code Check -->
+                <div class="p-3.5 bg-indigo-50 border border-indigo-100 rounded-xl space-y-1 text-[11px] text-slate-700">
+                  <span class="font-bold text-edulift-indigo block uppercase tracking-wider text-[9px]">California Ed Code Guard</span>
+                  <p class="leading-relaxed">Goal verified under <strong>CA Ed Code §56345(b)</strong> (statement of measurable annual goals) and aligns with specific California SELPA goal templates.</p>
+                </div>
+
+              </div>
+
+              <!-- Footer with verify buttons -->
+              <div class="pt-4 border-t border-slate-200 text-center space-y-2 flex-shrink-0">
+                <button onclick="simulateReviewCheck()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition">
+                  Confirm Teacher Verification
+                </button>
+                <span class="text-[9px] text-slate-400 block">Confirming moves draft to 'Reviewed' in Student profile</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="mt-4 text-center text-xs text-slate-400 flex-shrink-0">
+          Utilizing GPT-4 calibrated for IDEA Special Education legal guidance guidelines. No PII is sent to external databases.
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    function switchDocComponent(comp) {
+      // Toggle button active styles
+      const comps = ['goals', 'accommodations', 'mtss'];
+      comps.forEach(c => {
+        const btn = document.getElementById('btn-' + c);
+        btn.className = "py-1.5 px-2 text-center text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition";
+      });
+
+      const activeBtn = document.getElementById('btn-' + comp);
+      activeBtn.className = "py-1.5 px-2 text-center text-xs font-bold rounded-lg bg-white text-slate-900 shadow transition";
+
+      // Toggle Left fields
+      document.getElementById('need-goals-fields').classList.add('hidden');
+      document.getElementById('need-accomms-fields').classList.add('hidden');
+      document.getElementById('need-mtss-fields').classList.add('hidden');
+
+      if (comp === 'goals') {
+        document.getElementById('need-goals-fields').classList.remove('hidden');
+        document.getElementById('active-component-tag').textContent = "IEP Goals & Benchmarks";
+      } else if (comp === 'accommodations') {
+        document.getElementById('need-accomms-fields').classList.remove('hidden');
+        document.getElementById('active-component-tag').textContent = "IEP Accommodations";
+      } else if (comp === 'mtss') {
+        document.getElementById('need-mtss-fields').classList.remove('hidden');
+        document.getElementById('active-component-tag').textContent = "MTSS Intervention Plan";
+      }
+
+      // Toggle Right results
+      document.getElementById('content-goals').classList.add('hidden');
+      document.getElementById('content-accommodations').classList.add('hidden');
+      document.getElementById('content-mtss').classList.add('hidden');
+
+      document.getElementById('content-' + comp).classList.remove('hidden');
+    }
+
+    function generateDoc() {
+      const loader = document.getElementById('loader');
+      const loaderText = document.getElementById('loader-text');
+      
+      const comp = document.getElementById('active-component-tag').textContent;
+      loaderText.textContent = "EduLift AI is formulating compliant " + comp + "...";
+      
+      loader.classList.remove('hidden');
+      
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        
+        // Dynamically update names if user changed them
+        const name = document.getElementById('stud-name').value;
+        const disability = document.getElementById('disability').value;
+        const skill = document.getElementById('need-skill').value;
+
+        const nameVals = document.getElementsByClassName('student-name-val');
+        for(let i=0; i<nameVals.length; i++) {
+          nameVals[i].textContent = name;
+        }
+
+        const disabilityVals = document.getElementsByClassName('student-disability-val');
+        for(let i=0; i<disabilityVals.length; i++) {
+          disabilityVals[i].textContent = disability + " (" + skill + ")";
+        }
+
+        if (document.getElementById('btn-mtss').classList.contains('bg-white')) {
+          const tier = document.getElementById('mtss-tier').value;
+          const freq = document.getElementById('mtss-freq').value;
+          document.getElementById('mtss-tier-val').textContent = "Tier " + tier + " — Intervention";
+          document.getElementById('mtss-freq-val').textContent = freq;
+        }
+
+        alert("Draft output successfully compiled with strict federal IDEA & California Ed Code checks!");
+      }, 1500);
+    }
+
+    function simulateExport(format) {
+      alert("Successfully formatted draft! Exporting " + format + " file block. The downloaded file satisfies state filing audits.");
+    }
+
+    function simulateReviewCheck() {
+      alert("Verification successful! Draft marked as 'Reviewed' and verified by Sarah Jenkins. Document timestamp and version stored in student profile caseload record.");
+    }
+  </script>
+
+</body>
+</html>
