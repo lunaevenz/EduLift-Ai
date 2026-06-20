@@ -4,11 +4,7 @@ import {
   LayoutDashboard, 
   BookOpen, 
   MessageSquare, 
-  FileText, 
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-  LogOut
+  FileText
 } from 'lucide-react';
 import logoWhite from '../assets/logo-white.svg';
 

@@ -3,9 +3,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Sparkles,
-  Search,
-  CheckCircle2,
-  Clock,
   BookMarked
 } from 'lucide-react';
 
@@ -31,6 +28,7 @@ const LessonPlanGenerator: React.FC = () => {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
+  /*
   const handleCheckboxChange = (id: string) => {
     setFormData(prev => ({
       ...prev,
@@ -40,6 +38,7 @@ const LessonPlanGenerator: React.FC = () => {
       }
     }));
   };
+  */
 
   return (
     <div className="flex flex-col h-full overflow-hidden bg-edulift-canvas">
