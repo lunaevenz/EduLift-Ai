@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoPrimary from '../assets/logo-primary.svg';
 import heroImage from '../assets/landing-hero.png';
@@ -9,10 +9,25 @@ import {
   ChevronRight, 
   CheckCircle2,
   Calendar,
-  Zap
+  Zap,
+  ShieldCheck,
+  Sparkles,
+  Mail,
+  Send
 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubmitted(true);
+      setEmail('');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
       {/* Navigation */}
@@ -24,7 +39,7 @@ const LandingPage: React.FC = () => {
             </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
               <a href="#features" className="hover:text-primary-600 transition-colors">Features</a>
-              <a href="#pricing" className="hover:text-primary-600 transition-colors">Pricing</a>
+              <a href="#beta-waitlist" className="hover:text-primary-600 transition-colors">Beta Access</a>
               <Link to="/dashboard" className="bg-edulift-indigo text-white px-5 py-2.5 rounded-full hover:bg-indigo-700 transition-all shadow-md shadow-indigo-200">
                 Get Started Free
               </Link>
@@ -50,13 +65,13 @@ const LandingPage: React.FC = () => {
               Save 10+ hours a week on lesson plans, IEPs, and parent emails.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/dashboard" className="bg-edulift-indigo text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2 group">
-                Start Your Free Trial
+              <a href="#beta-waitlist" className="bg-edulift-indigo text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2 group">
+                Join Beta Waitlist
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <Link to="/dashboard" className="bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+                Explore Dashboard
               </Link>
-              <button className="bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
-                View Demo
-              </button>
             </div>
             <div className="mt-16 relative">
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10"></div>
@@ -70,7 +85,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* Features Grid - 3 High Impact Cards */}
       <section id="features" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
@@ -80,44 +95,107 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-              <div className="bg-blue-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-edulift-indigo group-hover:text-white transition-all text-blue-600">
-                <Calendar className="w-7 h-7" />
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16 group-hover:bg-indigo-100 transition-colors"></div>
+              <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-edulift-indigo group-hover:text-white transition-all text-edulift-indigo relative z-10">
+                <Calendar className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Lesson Planning</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Generate standards-aligned lesson plans in seconds. Fully customizable to your teaching style.
+              <h3 className="text-2xl font-bold mb-4 relative z-10">Lesson Planner</h3>
+              <p className="text-slate-600 leading-relaxed mb-6 relative z-10">
+                Generate standards-aligned lesson plans in seconds. 7-step guided workflow with CA CCSS/NGSS alignment and differentiation.
               </p>
+              <div className="flex items-center text-edulift-indigo font-semibold gap-2 group-hover:gap-3 transition-all relative z-10">
+                Learn more <ChevronRight className="w-4 h-4" />
+              </div>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-              <div className="bg-indigo-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-edulift-indigo group-hover:text-white transition-all text-indigo-600">
-                <FileText className="w-7 h-7" />
+            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full -mr-16 -mt-16 group-hover:bg-teal-100 transition-colors"></div>
+              <div className="bg-teal-50 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-600 group-hover:text-white transition-all text-teal-600 relative z-10">
+                <MessageSquare className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">IEP Documentation</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Draft professional IEP summaries and progress reports while ensuring compliance and accuracy.
+              <h3 className="text-2xl font-bold mb-4 relative z-10">Parent Assistant</h3>
+              <p className="text-slate-600 leading-relaxed mb-6 relative z-10">
+                Turn quick notes into professional emails. 5-tone model hub with multi-lingual support for Spanish, Vietnamese, and Arabic.
               </p>
+              <div className="flex items-center text-teal-600 font-semibold gap-2 group-hover:gap-3 transition-all relative z-10">
+                Learn more <ChevronRight className="w-4 h-4" />
+              </div>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-              <div className="bg-sky-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-edulift-indigo group-hover:text-white transition-all text-sky-600">
-                <MessageSquare className="w-7 h-7" />
+            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-violet-50 rounded-full -mr-16 -mt-16 group-hover:bg-violet-100 transition-colors"></div>
+              <div className="bg-violet-50 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-violet-600 group-hover:text-white transition-all text-violet-600 relative z-10">
+                <ShieldCheck className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Parent Comms</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Turn quick notes into empathetic, professional emails. Support for multi-language translation.
+              <h3 className="text-2xl font-bold mb-4 relative z-10">IEP Specialist</h3>
+              <p className="text-slate-600 leading-relaxed mb-6 relative z-10">
+                IDEA-compliant SMART goals and real-time compliance validation against California Ed Code. MTSS Tier 2/3 planning.
               </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-              <div className="bg-violet-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-edulift-indigo group-hover:text-white transition-all text-violet-600">
-                <TrendingUp className="w-7 h-7" />
+              <div className="flex items-center text-violet-600 font-semibold gap-2 group-hover:gap-3 transition-all relative z-10">
+                Learn more <ChevronRight className="w-4 h-4" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Career Growth</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Build your professional portfolio and prepare for observations with AI-powered coaching.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Beta Waitlist Section */}
+      <section id="beta-waitlist" className="py-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-indigo-600 rounded-[3rem] p-12 lg:p-24 relative overflow-hidden shadow-2xl shadow-indigo-200">
+            <div className="absolute top-0 left-0 w-full h-full opacity-10">
+              <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -ml-32 -mt-32"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mb-48"></div>
+            </div>
+            
+            <div className="relative z-10 max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500 text-white text-sm font-bold mb-8">
+                <Sparkles className="w-4 h-4" />
+                <span>Beta Launch Coming Soon</span>
+              </div>
+              <h2 className="text-4xl lg:text-6xl font-extrabold text-white mb-8">
+                Be the first to experience the future of teaching.
+              </h2>
+              <p className="text-xl text-indigo-100 mb-12 leading-relaxed">
+                We're rolling out access to our beta cohorts. Join the waitlist today to get early access, 
+                exclusive features, and special founding-member pricing.
+              </p>
+
+              {!isSubmitted ? (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                  <div className="flex-1 relative">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+                    <input 
+                      type="email" 
+                      placeholder="Enter your school email" 
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-12 pr-4 py-4 rounded-2xl border-0 focus:ring-4 focus:ring-indigo-300 text-slate-900 font-medium"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group"
+                  >
+                    Join Waitlist
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </button>
+                </form>
+              ) : (
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl animate-in fade-in zoom-in duration-500">
+                  <div className="w-20 h-20 bg-green-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+                    <CheckCircle2 className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">You're on the list!</h3>
+                  <p className="text-indigo-100">Check your inbox for a welcome message and more details.</p>
+                </div>
+              )}
+              
+              <p className="mt-8 text-indigo-200 text-sm font-medium">
+                No spam. Only updates about your beta access.
               </p>
             </div>
           </div>
@@ -125,7 +203,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Career OS Value Proposition */}
-      <section className="py-24">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl relative">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-indigo-600/10 skew-x-12 -translate-y-12"></div>
@@ -147,9 +225,9 @@ const LandingPage: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <Link to="/dashboard" className="mt-10 bg-edulift-indigo text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-900/40 inline-block">
+                <a href="#beta-waitlist" className="mt-10 bg-edulift-indigo text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-900/40 inline-block">
                   Ready to transform your career?
-                </Link>
+                </a>
               </div>
               <div className="hidden lg:block relative p-12">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
